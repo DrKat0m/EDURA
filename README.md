@@ -2,7 +2,8 @@
 This repository is for the plugin files for AAC Moodle Chatbot
 
 # Before cloning the Moodle block version, you will need to install the original plugin
-Download the zip of the latest version and install the plugin: [https://moodle.org/plugins/local_geniai](url) <br />
+Download the zip of the latest version and install the plugin: <br />
+   Link: https://moodle.org/plugins/local_geniai <br />
 Site Administration>Plugins>Install Plugins>Install plugin from the ZIP File
 
 ## Next clone the github repository into your mod folder
@@ -83,5 +84,5 @@ Make changes to the new branch<br />
     
 **Debugging using Xdebug**
 
-Navigate to the resource channel of the discord and follow Kartavya's step-by-step instructions of how to install PHP and Xdebug:
-[https://discord.com/channels/1328761463774511164/1328771210087235595/1346614587008618588](url)
+Navigate to the resource channel of the discord and follow Kartavya's step-by-step instructions of how to install PHP and Xdebug:<br />
+   Link: https://discord.com/channels/1328761463774511164/1328771210087235595/1346614587008618588
