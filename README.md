@@ -2,7 +2,7 @@
 This repository is for the plugin files for AAC Moodle Chatbot
 
 # Before cloning the Moodle block version, you will need to install the original plugin
-Download the zip of the latest version and install the plugin: [https://moodle.org/plugins/local_geniai](url)
+Download the zip of the latest version and install the plugin: [https://moodle.org/plugins/local_geniai](url) <br />
 Site Administration>Plugins>Install Plugins>Install plugin from the ZIP File
 
 ## Next clone the github repository into your mod folder
@@ -28,26 +28,22 @@ Make changes to the new branch<br />
 1. Install Git if you don't have it already.
 
    Link: https://git-scm.com/downloads
-
-3. Install Git LFS. This is for uploading large files onto github.
-
-   Link: https://git-lfs.com/
    
-4. In your command prompt (i.e. Git Bash), use the cd command to travel to the path where you want to clone the repo.
+2. In your command prompt (i.e. Git Bash), use the cd command to travel to the path where you want to clone the repo.
 
    Ex. cd C:\xampp\htdocs\MyMoodle\mod
 
-5. Clone the repository using the ssh key found in the green code dropdown.
+3. Clone the repository using the ssh key found in the green code dropdown.
 
    Ex. git clone PASTE-REPO-SSH-KEY-HERE
    
-6. Go inside the repo file using cd
+4. Go inside the repo file using cd
    
-7. Create your branch
+5. Create your branch
    
    Ex. git checkout -b jtd5597/first_branch
 
-10. Pull
+6. Pull
 
       Ex. git pull
 
