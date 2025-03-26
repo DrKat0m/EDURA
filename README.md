@@ -1,13 +1,14 @@
 # Moodle Chatbot
 This repository is for the plugin files for AAC Moodle Chatbot
 
-# Before cloning the Moodle block version, you will need to install the original plugin
+# Before installing the Moodle chatbot activity (block) version, you will need to install the original non-block plugin geniai
 Download the zip of the latest version and install the plugin: <br />
    Link: https://moodle.org/plugins/local_geniai <br />
 Site Administration>Plugins>Install Plugins>Install plugin from the ZIP File
 
-## Next clone the github repository into your mod folder
-Ex: C:\xampp\htdocs\MyMoodle\mod
+## Next install the Moodle chatbot activity (block) plugin code on this directory
+Download the zip of this directory and install it as a plugin: <br />
+Site Administration>Plugins>Install Plugins>Install plugin from the ZIP File
 
 ## Pulling changes from the repository to your local repository
 Make sure the IDE is connected to GitHub.
