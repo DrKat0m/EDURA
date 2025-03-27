@@ -1,6 +1,6 @@
 #page-mod-geniai-view #geniai-mod-popup {
     max-height: 650px;
-    background: red;
+    background: #fff;
     text-align: left;
     flex-direction: column;
     overflow: hidden;
@@ -212,3 +212,5 @@
 #page-mod-geniai-view #geniai-mod-popup #geniai-sendarea.geniai-active #geniai-icon-send {
     opacity: 1;
 }
+
+.activityicon { filter: none !important; }
