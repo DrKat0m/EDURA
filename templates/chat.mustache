@@ -1,0 +1,54 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_geniai/chat
+
+    Example context (json):
+    {
+        "geniainame": "Name",
+        "manage_capability": true,
+        "message_01": "string",
+        "message_02": "string"
+    }
+}}
+
+<div id="geniai-mod-popup">
+
+    <input type="hidden" id="local_geniai_message_01" value="{{message_01}}">
+    <input type="hidden" id="local_geniai_message_02" value="{{message_02}}">
+
+    <div id="geniai-scrollarea">
+        <div id="geniai-area-mensagens"></div>
+    </div>
+    <div id="geniai-sendarea">
+            <textarea id="geniai-textarea" contenteditable="true"
+                      placeholder="{{#str}}write_message,local_geniai{{/str}}"></textarea>
+
+        <div id="geniai-icon-stop"
+             style="display: none">
+            {{#pix}}icons/stop,local_geniai{{/pix}}
+        </div>
+
+        <div id="geniai-icon-mic"
+             title="{{#str}}send_message,local_geniai{{/str}}">
+            {{#pix}}icons/mic,local_geniai{{/pix}}
+        </div>
+        <div id="geniai-icon-send" title="{{#str}}send_message,local_geniai{{/str}}">
+            {{#pix}}icons/send,local_geniai{{/pix}}
+        </div>
+    </div>
+</div>
