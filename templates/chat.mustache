@@ -86,16 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
         localStorage.setItem("geniai-theme", isDark ? "dark" : "light");
     });
-
-    // Clear chat history on page load
-    const chatArea = document.getElementById('geniai-area-mensagens');
-    if (chatArea) {
-        // Clear any existing messages
-        chatArea.innerHTML = '';
-        
-        // Store a timestamp in sessionStorage
-        sessionStorage.setItem('lastChatClear', Date.now());
-    }
 });
 </script>
 
