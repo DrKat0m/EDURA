@@ -6,7 +6,7 @@
   }
   
 
-  /* ✅ Declare default light mode colors globally */
+  /* Declaring default light mode colors globally */
 :root {
     --bg-color: var(--gray-100, #f8f9fa);  /* Light theme background */
     --text-color: #004c7d;
@@ -14,18 +14,20 @@
     --server-msg-bg: #f2f2f2;
     --input-bg: #ffffff;
     --input-bar-bg: #e9e9e9;
-    --placeholder-color: #566069;
+    --placeholder-color: #373c41;
+    --icon-filter: brightness(0) saturate(100%);
 }
 
-/* ✅ Moved dark-mode overrides to body.dark-mode so JS toggle works */
+/* Moving to dark-mode overrides to body.dark-mode so JS toggle works */
 #page-mod-geniai-view.dark-mode {
     --bg-color: var(--gray-900, #212529);  /* Dark theme background */
     --text-color: #e0e0e0;
-    --message-bg: #1f3d26;
+    --message-bg: #0c120e;
     --server-msg-bg: #2a2a2a;
     --input-bg: #2a2a2a;
     --input-bar-bg: #1c1c1c;
     --placeholder-color: #9e9e9e;
+    --icon-filter: brightness(0) saturate(100%) invert(1);
 }
   
 #page-mod-geniai-view #geniai-mod-popup {
@@ -256,7 +258,7 @@
     box-shadow: none !important;
     width: 90px; 
     height: 90px;
-    border-radius: 50%;
+    border-radius: 25%;
 }
 
 /* Apply the variables */
@@ -356,7 +358,7 @@ body,
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Add these styles for the clear history button */
+/* Adding these styles for the clear history button */
 #geniai-clear-history {
     display: inline-flex;
     align-items: center;
@@ -382,7 +384,7 @@ body,
     height: 16px;
     opacity: 0.8;
     transition: all 0.3s ease;
-    filter: var(--icon-filter, none); /* Will adjust icon color based on theme */
+    filter: var(--icon-filter);  /*Will adjust icon color based on theme */
 }
 
 #geniai-clear-history:hover {
@@ -402,10 +404,10 @@ body,
 }
 
 /* Dark mode specific styles */
-#page-mod-geniai-view.dark-mode #geniai-clear-history {
+#page-mod-geniai-view.dark-mode #geniai-clear-history img{
     border-color: var(--server-msg-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    --icon-filter: invert(1); /* Invert icon color for dark mode */
+    --icon-filter: invert(var(--icon-filter)); /*Inverting icon color for dark mode */
 }
 
 #page-mod-geniai-view.dark-mode #geniai-clear-history:hover {
@@ -433,4 +435,59 @@ body,
 #geniai-clear-history:hover::after {
     opacity: 1;
     visibility: visible;
+}
+
+/* Wrap container to place button and dropdown side by side */
+#page-mod-geniai-view .theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+/* Style for dropdown label and select */
+#page-mod-geniai-view .geniai-scenario-select {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#page-mod-geniai-view .geniai-scenario-select label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Matching dropdown to button style */
+#page-mod-geniai-view .geniai-scenario-select select.custom-select {
+    background: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-bar-bg);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#page-mod-geniai-view .geniai-scenario-select select.custom-select:hover {
+    background: var(--message-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode compatibility */
+#page-mod-geniai-view.dark-mode .geniai-scenario-select select.custom-select {
+    border-color: var(--server-msg-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#page-mod-geniai-view.dark-mode .geniai-scenario-select select.custom-select:hover {
+    background: var(--server-msg-bg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }

@@ -61,6 +61,14 @@ $completion->set_module_viewed($cm);
 echo $OUTPUT->header();
 
 $capability = has_capability("local/geniai:manage", $context);
+/*
+$data = [
+    "message_01" => get_string("message_01", "local_geniai", fullname($USER)),
+    "manage_capability" => $capability,
+    "geniainame" => get_config("local_geniai", "geniainame"),
+    "mode" => get_config("local_geniai", "mode"),
+    "talk_geniai" => get_string("talk_geniai", "local_geniai", get_config("local_geniai", "geniainame")),
+];*/
 
 $data = [
     "message_01" => get_string("message_01", "local_geniai", fullname($USER)),
@@ -68,6 +76,12 @@ $data = [
     "geniainame" => get_config("local_geniai", "geniainame"),
     "mode" => get_config("local_geniai", "mode"),
     "talk_geniai" => get_string("talk_geniai", "local_geniai", get_config("local_geniai", "geniainame")),
+    "scenarios" => [
+        ["value" => "", "label" => "🎲 Random Parent"],
+        ["value" => "anna", "label" => "Anna Charles (Frustrated)"],
+        ["value" => "brianna", "label" => "Brianna Mitchell (Worried)"],
+        ["value" => "cathy", "label" => "Cathy Fratner (Confused)"]
+    ]
 ];
 
 $geniainame = get_config("local_geniai", "geniainame");

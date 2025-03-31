@@ -32,7 +32,18 @@
       <span class="theme-icon">🌙</span>
       <span class="theme-text">Dark Mode</span>
     </button>
-  </div>
+  
+
+<div class="geniai-scenario-select">
+    <label for="geniai-scenario">👥 Select Parent Persona:</label>
+    <select id="geniai-scenario" class="custom-select" onchange="handleScenarioChange(this.value)">
+        {{#scenarios}}
+            <option value="{{value}}">{{label}}</option>
+        {{/scenarios}}
+    </select>
+</div>
+</div>
+
   <div id="geniai-mod-popup">
 
     <input type="hidden" id="local_geniai_message_01" value="{{message_01}}">
@@ -68,6 +79,7 @@
 </div>
 </div>
 <script>
+
 document.addEventListener('DOMContentLoaded', function () {
     const toggleBtn = document.getElementById("theme-toggle-btn");
     const container = document.getElementById("page-mod-geniai-view");
@@ -86,6 +98,31 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
         localStorage.setItem("geniai-theme", isDark ? "dark" : "light");
     });
+    
+    // Add scenario handling
+    const scenarioSelect = document.getElementById('geniai-scenario');
+    
+    // Load saved scenario preference
+    const savedScenario = localStorage.getItem('geniai-scenario');
+    if (savedScenario) {
+        scenarioSelect.value = savedScenario;
+    }
+    
+    function handleScenarioChange(value) {
+    localStorage.setItem('geniai-scenario', value);
+
+    // Simulate a click on the Clear Chat button
+    const clearButton = document.getElementById('geniai-clear-history');
+    if (clearButton) {
+        clearButton.click();
+    }
+
+    // Optionally, dispatch the event for other listeners
+    const event = new CustomEvent('scenarioChanged', { detail: value });
+    document.dispatchEvent(event);
+    }
+    
+    window.handleScenarioChange = handleScenarioChange;
 });
 </script>
 
