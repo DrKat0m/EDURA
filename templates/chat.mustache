@@ -26,11 +26,36 @@
     }
 }}
 
-<div id="geniai-mod-popup">
+<div id="page-mod-geniai-view">
+  <div class="theme-toggle-container">
+    <button id="theme-toggle-btn">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-text">Dark Mode</span>
+    </button>
+  
+
+<div class="geniai-scenario-select">
+    <label for="geniai-scenario">👥 Select Parent Persona:</label>
+    <select id="geniai-scenario" class="custom-select" onchange="handleScenarioChange(this.value)">
+        {{#scenarios}}
+            <option value="{{value}}">{{label}}</option>
+        {{/scenarios}}
+    </select>
+</div>
+</div>
+
+  <div id="geniai-mod-popup">
 
     <input type="hidden" id="local_geniai_message_01" value="{{message_01}}">
     <input type="hidden" id="local_geniai_message_02" value="{{message_02}}">
-
+    <a id="geniai-clear-history"
+       title="{{#str}}clear_history_title,local_geniai{{/str}}"
+       href="#"
+       role="button"
+       aria-label="{{#str}}clear_history_title,local_geniai{{/str}}">
+        {{#pix}}icons/clear,local_geniai{{/pix}}
+        <span class="clear-text">Clear Chat</span>
+    </a>
     <div id="geniai-scrollarea">
         <div id="geniai-area-mensagens"></div>
     </div>
@@ -52,3 +77,52 @@
         </div>
     </div>
 </div>
+</div>
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toggleBtn = document.getElementById("theme-toggle-btn");
+    const container = document.getElementById("page-mod-geniai-view");
+
+    if (!toggleBtn) return;
+
+    // Load saved theme preference on page load
+    const savedTheme = localStorage.getItem("geniai-theme");
+    if (savedTheme === "dark") {
+        container.classList.add("dark-mode");
+        toggleBtn.textContent = "☀️ Light Mode";
+    }
+
+    toggleBtn.addEventListener("click", function () {
+        const isDark = container.classList.toggle("dark-mode");
+        toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        localStorage.setItem("geniai-theme", isDark ? "dark" : "light");
+    });
+    
+    // Add scenario handling
+    const scenarioSelect = document.getElementById('geniai-scenario');
+    
+    // Load saved scenario preference
+    const savedScenario = localStorage.getItem('geniai-scenario');
+    if (savedScenario) {
+        scenarioSelect.value = savedScenario;
+    }
+    
+    function handleScenarioChange(value) {
+    localStorage.setItem('geniai-scenario', value);
+
+    // Simulate a click on the Clear Chat button
+    const clearButton = document.getElementById('geniai-clear-history');
+    if (clearButton) {
+        clearButton.click();
+    }
+
+    // Optionally, dispatch the event for other listeners
+    const event = new CustomEvent('scenarioChanged', { detail: value });
+    document.dispatchEvent(event);
+    }
+    
+    window.handleScenarioChange = handleScenarioChange;
+});
+</script>
+
