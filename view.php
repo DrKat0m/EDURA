@@ -80,8 +80,8 @@ $data = [
         ["value" => "", "label" => "🎲 Random Parent"],
         ["value" => "anna", "label" => "Anna Charles (Frustrated)"],
         ["value" => "brianna", "label" => "Brianna Mitchell (Worried)"],
-        ["value" => "cathy", "label" => "Cathy Fratner (Confused)"]
-    ]
+        ["value" => "cathy", "label" => "Cathy Fratner (Confused)"],
+    ],
 ];
 
 $geniainame = get_config("local_geniai", "geniainame");
