@@ -31,41 +31,6 @@
   <input type="hidden" id="local_geniai_message_02" value="{{message_02}}" />
 
   <div id="geniai-scrollarea">
-    <div class="geniai-header">
-      <div class="geniai-info">
-        {{#pix}}chat/open-tutor,local_geniai{{/pix}}
-        <div class="geniai-infoname">
-          <span class="geniai-name">{{{geniainame}}}</span>
-          <span class="geniai-status">{{#str}}online,local_geniai{{/str}}</span>
-        </div>
-      </div>
-      <div class="right-icons">
-        {{#manage_capability}}
-        <a
-          id="geniai-icon-report"
-          target="_blank"
-          title="{{#str}}report_title,local_geniai{{/str}}"
-          href="{{{config.wwwroot}}}/local/geniai/report.php"
-        >
-          {{#pix}}icons/report,local_geniai{{/pix}}
-        </a>
-        {{/manage_capability}}
-        <a
-          id="geniai-clear-history"
-          title="{{#str}}clear_history_title,local_geniai{{/str}}"
-          href="#"
-        >
-          {{#pix}}icons/clear,local_geniai{{/pix}}
-        </a>
-        <a
-          id="geniai-icon-close"
-          title="{{#str}}close_title,local_geniai{{/str}}"
-          href="#"
-        >
-          {{#pix}}icons/close,local_geniai{{/pix}}
-        </a>
-      </div>
-    </div>
     <div id="geniai-area-mensagens"></div>
   </div>
 
