@@ -429,3 +429,15 @@
   border: 1px solid #dee5ec; /* Optional: adds a subtle border */
   padding: 5px;
 }
+
+#geniai-icon-send, #genai-icon-mic{
+    filter: grayscale(100%);
+}
+
+#geniai-icon-send:hover,#geniai-icon-mic:hover {
+  filter: brightness(0);
+}
+
+.activityicon {
+  filter: none !important;
+}
