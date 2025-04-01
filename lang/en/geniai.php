@@ -25,9 +25,9 @@
 defined('MOODLE_INTERNAL') || die;
 
 $string['geniai:addinstance'] = 'Add instance';
-$string['geniai:view'] = 'Allow the user to view the GeniAI Chat';
-$string['modulename'] = 'GeniAI Chat';
-$string['modulenameplural'] = 'GeniAI Chat';
+$string['geniai:view'] = 'Allow the user to view the LAFF Stragety Chat';
+$string['modulename'] = 'LAFF Stragety Chat';
+$string['modulenameplural'] = 'LAFF Stragety Chat';
 $string['pluginadministration'] = 'Adminitrate Chats';
-$string['pluginname'] = 'GeniAI Chat';
+$string['pluginname'] = 'LAFF Stragety Chat';
 $string['privacy:metadata'] = 'None store data';
