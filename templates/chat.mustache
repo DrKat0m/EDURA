@@ -26,54 +26,80 @@
     }
 }}
 
-<div id="geniai-mod-popup">
-  <input type="hidden" id="local_geniai_message_01" value="{{message_01}}" />
-  <input type="hidden" id="local_geniai_message_02" value="{{message_02}}" />
+<div class="chat-container">
+    <div id="geniai-mod-popup">
+        <input type="hidden" id="local_geniai_message_01" value="{{message_01}}" />
+        <input type="hidden" id="local_geniai_message_02" value="{{message_02}}" />
 
-  <div id="geniai-scrollarea">
-    <div id="geniai-area-mensagens"></div>
-  </div>
+        <div id="geniai-scrollarea">
+            <div id="geniai-area-mensagens"></div>
+        </div>
 
-  <div id="geniai-sendarea">
-    <textarea
-      id="geniai-textarea"
-      contenteditable="true"
-      placeholder="{{#str}}write_message,local_geniai{{/str}}"
-    ></textarea>
+        <div id="geniai-sendarea">
+            <textarea
+                id="geniai-textarea"
+                contenteditable="true"
+                placeholder="{{#str}}write_message,local_geniai{{/str}}"
+                rows="1"
+            ></textarea>
 
-    <div id="geniai-icon-stop" style="display: none">
-      {{#pix}}icons/stop,local_geniai{{/pix}}
+            <div id="geniai-icon-stop" style="display: none" title="Stop">
+                {{#pix}}icons/stop,local_geniai{{/pix}}
+            </div>
+
+            <div id="geniai-icon-mic" title="{{#str}}send_message,local_geniai{{/str}}">
+                {{#pix}}icons/mic,local_geniai{{/pix}}
+            </div>
+
+            <div id="geniai-icon-send" title="{{#str}}send_message,local_geniai{{/str}}">
+                {{#pix}}icons/send,local_geniai{{/pix}}
+            </div>
+        </div>
     </div>
-
-    <div id="geniai-icon-mic" title="{{#str}}send_message,local_geniai{{/str}}">
-      {{#pix}}icons/mic,local_geniai{{/pix}}
-    </div>
-    <div
-      id="geniai-icon-send"
-      title="{{#str}}send_message,local_geniai{{/str}}"
-    >
-      {{#pix}}icons/send,local_geniai{{/pix}}
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      const target = document.getElementById("geniai-area-mensagens");
-      if (!target) return;
-
-      const applyLastClass = () => {
-        const messages = target.querySelectorAll(".geniai-message");
-        messages.forEach((msg) => msg.classList.remove("last"));
-        if (messages.length > 0) {
-          messages[messages.length - 1].classList.add("last");
-        }
-      };
-
-      const observer = new MutationObserver(applyLastClass);
-      observer.observe(target, { childList: true, subtree: false });
-
-      applyLastClass();
-    })();
-  </script>
 </div>
+
+<script>
+    (function() {
+        const target = document.getElementById("geniai-area-mensagens");
+        if (!target) return;
+
+        const applyLastClass = () => {
+            const messages = target.querySelectorAll(".geniai-message");
+            messages.forEach(msg => msg.classList.remove("last"));
+            if (messages.length > 0) {
+                messages[messages.length - 1].classList.add("last");
+            }
+        };
+
+        const observer = new MutationObserver(applyLastClass);
+        observer.observe(target, { childList: true, subtree: false });
+
+        // Improved auto-resize textarea
+        const textarea = document.getElementById("geniai-textarea");
+        if (textarea) {
+            let timeoutId;
+            const resizeTextarea = () => {
+                textarea.style.height = 'auto';
+                const newHeight = Math.min(textarea.scrollHeight, 120);
+                if (newHeight !== parseInt(textarea.style.height)) {
+                    textarea.style.height = newHeight + 'px';
+                }
+            };
+
+            textarea.addEventListener("input", () => {
+                // Cancel the previous timeout
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+                // Set a new timeout
+                timeoutId = setTimeout(resizeTextarea, 10);
+            });
+
+            // Initial resize
+            resizeTextarea();
+        }
+
+        applyLastClass();
+    })();
+</script>
 

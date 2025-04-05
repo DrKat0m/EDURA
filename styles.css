@@ -1,19 +1,235 @@
 #page-mod-geniai-view #geniai-mod-popup {
-  max-height: 650px;
-  background: #fff;
-  text-align: left;
+  max-height: 80vh;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: all 0.4s;
+  transition: all 0.3s ease;
+  margin: 20px auto;
+  width: 95%;
+  max-width: 800px;
 }
+
 #page-mod-geniai-view #geniai-mod-popup #geniai-scrollarea {
-  min-height: 450px;
-  max-height: 650px;
-  background-size: cover;
-  margin: 0;
-  overflow: hidden;
-  overflow-y: scroll;
+  flex: 1;
+  min-height: 400px;
+  background: #f8f9fa;
+  overflow-y: auto;
+  padding: 20px;
+  scroll-behavior: smooth;
 }
+
+#page-mod-geniai-view #geniai-mod-popup #geniai-scrollarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-scrollarea::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-scrollarea
+  #geniai-area-mensagens {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 0;
+}
+
+/* User message style */
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-scrollarea
+  #geniai-area-mensagens
+  .geniai-message:not(.geniai-server):not(.geniai-error) {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border-radius: 24px;
+  color: white;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 80%;
+  padding: 12px 18px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: messageSlideIn 0.3s ease;
+}
+
+/* Bot message style */
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-scrollarea
+  #geniai-area-mensagens
+  .geniai-message.geniai-server {
+  align-self: flex-start;
+  background: white;
+  border-radius: 24px;
+  color: #1a1a1a;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 80%;
+  padding: 12px 18px;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: messageSlideIn 0.3s ease;
+}
+
+/* Error message style */
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-scrollarea
+  #geniai-area-mensagens
+  .geniai-message.geniai-error {
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 24px;
+  padding: 12px 18px;
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+/* Input area styling */
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea {
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+}
+
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-textarea {
+  flex: 1;
+  border: 1px solid #e5e7eb;
+  border-radius: 24px;
+  padding: 12px 20px;
+  font-size: 15px;
+  line-height: 1.5;
+  resize: none;
+  min-height: 24px;
+  max-height: 120px;
+  transition: height 0.1s ease-out;
+  background: #f9fafb;
+  overflow-y: auto;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-sendarea
+  #geniai-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Icon buttons styling */
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-send,
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-mic,
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-stop {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #6366f1;
+  color: white;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-send img,
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-mic img,
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-stop img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  transition: all 0.2s ease;
+  display: block;
+  margin: auto;
+}
+
+/* Remove conflicting styles */
+#geniai-icon-send,
+#geniai-icon-mic {
+  filter: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#geniai-icon-send img,
+#geniai-icon-mic img {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+#geniai-icon-send:hover,
+#geniai-icon-mic:hover {
+  filter: none !important;
+}
+
+/* Override any conflicting styles */
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-mic {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-mic img {
+  width: 20px !important;
+  height: 20px !important;
+  margin: auto !important;
+}
+
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-sendarea
+  #geniai-icon-send:hover,
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-sendarea
+  #geniai-icon-mic:hover {
+  background: #4f46e5;
+  transform: scale(1.05);
+}
+
+#page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-icon-stop {
+  background: #ef4444;
+}
+
+#page-mod-geniai-view
+  #geniai-mod-popup
+  #geniai-sendarea
+  #geniai-icon-stop:hover {
+  background: #dc2626;
+}
+
+/* Animations */
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #page-mod-geniai-view #geniai-mod-popup #geniai-scrollarea .geniai-header {
   color: #fff;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15);
@@ -37,7 +253,7 @@
   .geniai-header
   .geniai-info {
   display: flex;
-  align-items: center;
+  justify-content: center;
   text-align: left;
   transition: all 0.4s;
   gap: 9px;
@@ -151,68 +367,6 @@
 #page-mod-geniai-view
   #geniai-mod-popup
   #geniai-scrollarea
-  #geniai-area-mensagens {
-  float: left;
-  clear: both;
-  width: 100%;
-  min-height: 200px;
-  box-sizing: border-box;
-  padding-top: 70px;
-  margin-top: 0;
-}
-
-/* --- User (mine) message style --- */
-#page-mod-geniai-view
-  #geniai-mod-popup
-  #geniai-scrollarea
-  #geniai-area-mensagens
-  .geniai-message:not(.geniai-server):not(.geniai-error) {
-  float: right;
-  clear: both;
-  position: relative;
-  margin: 2px 10px 5px 10px;
-  box-shadow: none;
-  background: linear-gradient(to bottom, #00d0ea 0%, #0085d1 100%);
-  background-attachment: fixed;
-  border-radius: 20px;
-  padding: 8px 15px;
-  max-width: calc(100% - 90px);
-  min-width: 80px;
-  color: white;
-  font-size: 16px;
-  line-height: 21px;
-  letter-spacing: 0.3px;
-  outline: none;
-  margin-left: 25%;
-}
-
-/* --- Bot (yours) message style --- */
-#page-mod-geniai-view
-  #geniai-mod-popup
-  #geniai-scrollarea
-  #geniai-area-mensagens
-  .geniai-message.geniai-server {
-  float: left;
-  clear: both;
-  position: relative;
-  margin: 2px 10px 5px 10px;
-  box-shadow: none;
-  background-color: #eee;
-  border-radius: 20px;
-  padding: 8px 15px;
-  max-width: calc(100% - 90px);
-  min-width: 80px;
-  color: #333;
-  font-size: 16px;
-  line-height: 21px;
-  letter-spacing: 0.3px;
-  outline: none;
-  margin-right: 25%;
-}
-
-#page-mod-geniai-view
-  #geniai-mod-popup
-  #geniai-scrollarea
   #geniai-area-mensagens
   .geniai-message
   button {
@@ -229,14 +383,6 @@
   #geniai-area-mensagens
   .geniai-message.format-text {
   white-space: break-spaces;
-}
-#page-mod-geniai-view
-  #geniai-mod-popup
-  #geniai-scrollarea
-  #geniai-area-mensagens
-  .geniai-message.geniai-error {
-  background-color: #e91e63;
-  color: #fff;
 }
 #page-mod-geniai-view
   #geniai-mod-popup
@@ -281,7 +427,7 @@
   margin: 0;
   padding: 10px 8px 10px 15px;
   border-top: 1px solid #dee5ec;
-  align-items: center;
+  justify-content: center;
 }
 #page-mod-geniai-view #geniai-mod-popup #geniai-sendarea #geniai-textarea {
   margin: 0;
@@ -352,69 +498,28 @@
   opacity: 1;
 }
 
-/* Tail for bot messages (yours) */
+/* Remove tail styles */
 #page-mod-geniai-view
   #geniai-mod-popup
   #geniai-scrollarea
   #geniai-area-mensagens
-  .geniai-message.geniai-server.last::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  left: -7px;
-  height: 20px;
-  width: 20px;
-  background: #eee;
-  border-bottom-right-radius: 15px;
-}
+  .geniai-message.geniai-server.last::before,
 #page-mod-geniai-view
   #geniai-mod-popup
   #geniai-scrollarea
   #geniai-area-mensagens
-  .geniai-message.geniai-server.last::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  left: -10px;
-  width: 10px;
-  height: 20px;
-  background: white;
-  border-bottom-right-radius: 10px;
-}
-
-/* Tail for user messages (mine) */
+  .geniai-message.geniai-server.last::after,
 #page-mod-geniai-view
   #geniai-mod-popup
   #geniai-scrollarea
   #geniai-area-mensagens
-  .geniai-message.last:not(.geniai-server):not(.geniai-error)::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  right: -8px;
-  height: 20px;
-  width: 20px;
-  background: linear-gradient(to bottom, #00d0ea 0%, #0085d1 100%);
-  background-attachment: fixed;
-  border-bottom-left-radius: 15px;
-}
+  .geniai-message.last:not(.geniai-server):not(.geniai-error)::before,
 #page-mod-geniai-view
   #geniai-mod-popup
   #geniai-scrollarea
   #geniai-area-mensagens
   .geniai-message.last:not(.geniai-server):not(.geniai-error)::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  right: -10px;
-  width: 10px;
-  height: 20px;
-  background: white;
-  border-bottom-left-radius: 10px;
+  display: none;
 }
 
 #geniai-sendarea {
@@ -430,11 +535,13 @@
   padding: 5px;
 }
 
-#geniai-icon-send, #genai-icon-mic{
-    filter: grayscale(100%);
+#geniai-icon-send,
+#geniai-icon-mic {
+  filter: grayscale(100%);
 }
 
-#geniai-icon-send:hover,#geniai-icon-mic:hover {
+#geniai-icon-send:hover,
+#geniai-icon-mic:hover {
   filter: brightness(0);
 }
 
