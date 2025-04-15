@@ -52,7 +52,7 @@ class mod_geniai_mod_form extends moodleform_mod {
         }
 
         $this->standard_intro_elements();
-
+        $this->standard_grading_coursemodule_elements();
         // Add standard elements.
         $this->standard_coursemodule_elements();
 

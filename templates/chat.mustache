@@ -67,7 +67,7 @@
              style="display: none">
             {{#pix}}icons/stop,local_geniai{{/pix}}
         </div>
-
+        
         <div id="geniai-icon-mic"
              title="{{#str}}send_message,local_geniai{{/str}}">
             {{#pix}}icons/mic,local_geniai{{/pix}}
@@ -81,6 +81,49 @@
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
+
+    function handleScenarioChange(value) {
+    localStorage.setItem('geniai-scenario', value);
+
+    // Simulate a click on the Clear Chat button *first*
+    const clearButton = document.getElementById('geniai-clear-history');
+    if (clearButton) {
+        clearButton.click();
+    }
+    const sendArea = document.getElementById("geniai-sendarea");
+        if (sendArea) {
+            sendArea.style.display = "flex";
+        }
+
+
+    // Delay setting the textarea + sending to ensure chat is cleared
+    setTimeout(() => {
+        const textarea = document.getElementById("geniai-textarea");
+        textarea.value = `$$persona=${value}$$`;
+
+        // Trigger input event if necessary
+        textarea.dispatchEvent(new Event("input"));
+
+        // Simulate click on send icon
+        document.getElementById("geniai-icon-send")?.click();
+
+        setTimeout(() => {
+        const messages = document.querySelectorAll('.geniai-message.geniai-user');
+        if (messages.length > 0) {
+            const lastMessage = messages[messages.length - 1];
+            if (lastMessage.textContent.includes("*/persona=")) {
+                lastMessage.remove();
+            }
+        }
+    }, 300);
+
+        // Optional: Fire custom event
+        document.dispatchEvent(new CustomEvent('scenarioChanged', { detail: value }));
+    }, 200); // Small delay to let clear action finish
+}
+window.handleScenarioChange = handleScenarioChange;
+
+
     const toggleBtn = document.getElementById("theme-toggle-btn");
     const container = document.getElementById("page-mod-geniai-view");
 
@@ -99,30 +142,68 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem("geniai-theme", isDark ? "dark" : "light");
     });
     
-    // Add scenario handling
-    const scenarioSelect = document.getElementById('geniai-scenario');
-    
-    // Load saved scenario preference
-    const savedScenario = localStorage.getItem('geniai-scenario');
-    if (savedScenario) {
-        scenarioSelect.value = savedScenario;
-    }
-    
-    function handleScenarioChange(value) {
-    localStorage.setItem('geniai-scenario', value);
 
-    // Simulate a click on the Clear Chat button
-    const clearButton = document.getElementById('geniai-clear-history');
-    if (clearButton) {
-        clearButton.click();
+const clearButton = document.getElementById('geniai-clear-history');
+if (clearButton) {
+    clearButton.addEventListener('click', () => {
+        const sendArea = document.getElementById("geniai-sendarea");
+        if (sendArea) {
+            sendArea.style.display = "flex";
+        }
+    });
+}
+
+
+    const cmid = {{{cmid}}}; // Passed from PHP → Mustache
+
+    function extractAndSendGrade() {
+        const messages = document.querySelectorAll(".geniai-message.geniai-server");
+        if (messages.length === 0) return;
+
+        const last = messages[messages.length - 1];
+        const text = last.textContent.trim();
+        const match = text.match(/.*?Grade\s*-\s*(\d+(?:\.\d+)?)\s*out of\s*10.*?/i);
+
+        if (match) {
+            const grade = parseFloat(match[1]);
+            console.log("Detected grade:", grade);
+
+            const sendArea = document.getElementById("geniai-sendarea");
+            if (sendArea) {
+                sendArea.style.display = "none";
+            }
+
+            fetch(M.cfg.wwwroot + '/mod/geniai/gradeajax.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                cmid: cmid,
+                grade: grade,
+                sesskey: M.cfg.sesskey
+                })
+
+
+            })
+            .then(res => res.json())
+            .then(data => console.log("Grade response:", data))
+            .catch(err => console.error("Grade error:", err));
+        }
     }
 
-    // Optionally, dispatch the event for other listeners
-    const event = new CustomEvent('scenarioChanged', { detail: value });
-    document.dispatchEvent(event);
-    }
     
-    window.handleScenarioChange = handleScenarioChange;
+
+    // Run after a small delay or after chat completes
+    const target = document.getElementById('geniai-area-mensagens');
+    if (target) {
+        const observer = new MutationObserver(() => {
+            extractAndSendGrade();
+        });
+        observer.observe(target, { childList: true, subtree: true });
+    }
+
+    
 });
 </script>
 

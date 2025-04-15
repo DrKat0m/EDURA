@@ -81,7 +81,21 @@ $course = $DB->get_record("course", ["id" => $COURSE->id]);
 $data["message_02"] = get_string("message_02_course", "local_geniai",
     ["geniainame" => $geniainame, "moodlename" => $SITE->fullname, "coursename" => $course->fullname]);
 
+$data['cmid'] = $cm->id;
+
 echo $OUTPUT->render_from_template("mod_geniai/chat", $data);
 $PAGE->requires->js_call_amd("local_geniai/chat", "init", [$COURSE->id, release::version()]);
 
+/*
+require_once($CFG->libdir.'/gradelib.php');
+
+// Get current user ID and course module info.
+$userid = $USER->id;
+$grade = 8.0; // Hardcoded for testing.
+
+$grades = array('userid' => $userid, 'rawgrade' => $grade);
+
+// $geniai is the activity instance object (must contain id, course, etc.)
+geniai_grade_item_update($geniai, $grades);
+*/
 echo $OUTPUT->footer();

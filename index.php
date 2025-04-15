@@ -77,6 +77,6 @@ foreach ($geniais as $geniai) {
 
     $table->data[] = $data;
 }
-
+  
 echo html_writer::table($table);
 echo $OUTPUT->footer();

@@ -56,6 +56,8 @@ function geniai_supports(string $feature) {
             return true;
         case FEATURE_MOD_PURPOSE:
             return MOD_PURPOSE_ASSESSMENT;
+        case FEATURE_GRADE_HAS_GRADE:
+            return true;
         default:
             return null;
     }
@@ -81,7 +83,6 @@ function geniai_add_instance(stdClass $data, $mform = null): int {
     $cmid = $data->coursemodule;
 
     $data->id = $DB->insert_record("geniai", $data);
-
     // We need to use context now, so we need to make sure all needed info is already in db.
     $DB->set_field("course_modules", "instance", $data->id, ["id" => $cmid]);
 
@@ -105,7 +106,6 @@ function geniai_update_instance(stdClass $data, $mform = null): bool {
 
     $data->timemodified = time();
     $data->id = $data->instance;
-
     return $DB->update_record("geniai", $data);
 }
 
@@ -133,3 +133,24 @@ function geniai_delete_instance(int $id): bool {
     return true;
 }
 
+function geniai_grade_item_update($geniai, $grades = null) {
+    require_once(__DIR__ . '/../../lib/gradelib.php');
+
+    $item = array(
+        'itemname' => $geniai->name,
+        'gradetype' => GRADE_TYPE_VALUE,
+        'grademax'  => 10,
+        'grademin'  => 0
+    );
+
+    if ($grades === null) {
+        $item['reset'] = true;
+        return grade_update('mod/geniai', $geniai->course, 'mod', 'geniai', $geniai->id, 0, null, $item);
+    } else {
+        return grade_update('mod/geniai', $geniai->course, 'mod', 'geniai', $geniai->id, 0, $grades, $item);
+    }
+}
+
+function geniai_grade_item_delete($geniai) {
+    return grade_update('mod/geniai', $geniai->course, 'mod', 'geniai', $geniai->id, 0, null, array('deleted'=>1));
+}
