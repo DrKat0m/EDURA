@@ -73,7 +73,11 @@ $data = [
         ["value" => "anna", "label" => "Anna Charles (Frustrated)"],
         ["value" => "brianna", "label" => "Brianna Mitchell (Worried)"],
         ["value" => "cathy", "label" => "Cathy Fratner (Confused)"],
+        //["value" => "parent_firstname", "label" => "Parent Fullname to be shown (situtaion)"]
+        //Everytime adding a new parent scenario in the backend make sure to add the same firstname "value" here, as in the local/classes/external/api.php file
     ],
+    "teacher_name" => fullname($USER), // ✅ added here
+    "cmid" => $cm->id,
 ];
 
 $geniainame = get_config("local_geniai", "geniainame");

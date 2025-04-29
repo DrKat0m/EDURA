@@ -1,3 +1,21 @@
+/*
+  ⚠️ WARNING: DO NOT DELETE ANYTHING FROM THIS FILE ⚠️
+
+  This CSS file contains critical style rules tied to structural elements of the plugin.
+  Removing or modifying existing styles may cause layout issues or break core functionality.
+
+  ✅ If you need to:
+    - Add new CSS rules
+    - Modify the style of existing elements
+
+  ➤ Please append your changes at the BOTTOM of this file.
+
+  🔄 After making any changes, remember to PURGE ALL CACHES in Moodle
+     (Site administration → Development → Purge all caches) to ensure changes take effect.
+
+  Thank you!
+*/
+
 #page-mod-geniai-view {
     color-scheme: light dark;
     background-color: var(--bg-color);
@@ -491,3 +509,423 @@ body,
     background: var(--server-msg-bg);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+
+
+#page-mod-geniai-view .geniai-button-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 10px 0;
+    flex-direction: row;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  #page-mod-geniai-view .btn {
+    all: unset;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 11em;
+    height: 3.5em;
+    border-radius: 2em;
+    background: #1C1A1C !important;
+    color: #AAAAAA !important;
+    font-weight: 600;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 450ms ease-in-out;
+    box-shadow: none;
+    position: relative;
+  }
+  
+  #page-mod-geniai-view .btn:hover {
+    background: linear-gradient(0deg,#A47CF3,#683FEA) !important;
+    box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+                inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+                0px 0px 0px 3px rgba(255, 255, 255, 0.2),
+                0px 0px 120px 0px #9917FF !important;
+    transform: translateY(-1px);
+  }
+  
+  #page-mod-geniai-view .text {
+    color: #AAAAAA !important;
+    font-size: 0.9em;
+  }
+  
+  #page-mod-geniai-view .btn:hover .text {
+    color: white !important;
+  }
+  
+  #page-mod-geniai-view .sparkle {
+    fill: #AAAAAA !important;
+    transition: all 800ms ease;
+    width: 20px;
+    height: 20px;
+  }
+  
+  #page-mod-geniai-view .btn:hover .sparkle {
+    fill: white !important;
+    transform: scale(1.1) !important;
+  }
+  
+  /* Dropdown size match */
+  #page-mod-geniai-view .custom-select {
+    appearance: none;
+    background: #1C1A1C !important;
+    color: #AAAAAA !important;
+    border-radius: 2em;
+    height: 3.5em;
+    border: none;
+    padding: 0 1em;
+    font-weight: 600;
+    font-size: 0.9em;
+    cursor: pointer;
+  }
+  
+  #page-mod-geniai-view .custom-select:hover {
+    background: linear-gradient(0deg,#A47CF3,#683FEA) !important;
+    color: white !important;
+  }
+
+  #page-mod-geniai-view .theme-icon {
+    font-size: 0.9em !important;
+    display: inline-block;
+    line-height: 1;
+    transform: translateY(1px);
+    margin-right: 6px;
+  }
+  
+  #page-mod-geniai-view .geniai-button-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 12px !important;
+    padding: 10px 0 !important;
+    flex-wrap: wrap !important;
+  }
+  
+  /* Force left-group to stay left */
+  #page-mod-geniai-view .button-group-left {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+  }
+  
+  /* Force right-group to align to end */
+  #page-mod-geniai-view .button-group-right {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    gap: 12px !important;
+  }
+
+  /* Brutalist Button Styles Scoped to Moodle Module */
+#page-mod-geniai-view .button-container {
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+    margin: 1em 0 !important;
+  }
+  
+  /* Common button styles */
+  #page-mod-geniai-view .brutalist-button {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 120px !important;
+    height: 120px !important;
+    color: #e5dede !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    position: relative !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    background-color: #063525 !important;
+    border: 3px solid #42c498 !important;
+    border-radius: 12px !important;
+    box-shadow: 4px 4px 1px #000000 !important;
+  }
+  
+  /* Hover styling */
+  #page-mod-geniai-view .brutalist-button:hover {
+    background-color: #1a5c46 !important;
+    border-color: #030504 !important;
+    transform: translate(-6px, -6px) rotate(1deg) !important;
+    box-shadow: 10px 10px 0 #000000, 15px 15px 20px rgba(64, 164, 122, 0.2) !important;
+  }
+  
+  #page-mod-geniai-view .brutalist-button::before,
+  #page-mod-geniai-view .brutalist-button::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent) !important;
+    transition: 0.6s !important;
+  }
+  
+  #page-mod-geniai-view .brutalist-button::before {
+    left: -100% !important;
+  }
+  #page-mod-geniai-view .brutalist-button::after {
+    left: 100% !important;
+  }
+  
+  #page-mod-geniai-view .brutalist-button:hover::before {
+    animation: swipeRight 1.5s infinite !important;
+  }
+  #page-mod-geniai-view .brutalist-button:hover::after {
+    animation: swipeLeft 1.5s infinite !important;
+  }
+  
+  @keyframes swipeRight {
+    100% {
+      transform: translateX(200%) skew(-45deg);
+    }
+  }
+  @keyframes swipeLeft {
+    100% {
+      transform: translateX(-200%) skew(-45deg);
+    }
+  }
+  
+  /* Icon container */
+  #page-mod-geniai-view .openai-logo {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease-in-out !important;
+    z-index: 3 !important;
+  }
+  
+  /* OpenAI Icon */
+  #page-mod-geniai-view .openai-icon {
+    width: 56px !important;
+    height: 56px !important;
+    transition: all 0.3s ease-in-out !important;
+  }
+  
+  /* Text container */
+  #page-mod-geniai-view .button-text {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+    opacity: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease-in-out !important;
+    z-index: 3 !important;
+  }
+  
+  #page-mod-geniai-view .button-text span:first-child {
+    font-size: 11px !important;
+    font-weight: normal !important;
+  }
+  #page-mod-geniai-view .button-text span:last-child {
+    font-size: 14px !important;
+  }
+  
+  /* Hover behavior */
+  #page-mod-geniai-view .brutalist-button:hover .openai-logo {
+    transform: translateY(-10px) !important;
+  }
+  #page-mod-geniai-view .brutalist-button:hover .openai-icon {
+    width: 42px !important;
+    height: 42px !important;
+    animation: spin-and-zoom 4s ease-in-out infinite !important;
+  }
+  #page-mod-geniai-view .brutalist-button:hover .button-text {
+    opacity: 1 !important;
+    max-height: 60px !important;
+    margin-top: 8px !important;
+  }
+  
+  /* Logo spin animation */
+  @keyframes spin-and-zoom {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+  
+  #page-mod-geniai-view .brutalist-button:active .openai-icon,
+  #page-mod-geniai-view .brutalist-button:active .button-text {
+    transform: scale(0.95) !important;
+  }
+
+  #page-mod-geniai-view .rerc-button {
+    background-color: #063525 !important; /* same as OpenAI button */
+    border: 3px solid #42c498 !important;
+    border-radius: 12px !important;
+    box-shadow: 4px 4px 1px #000000 !important;
+  }
+  
+  #page-mod-geniai-view .rerc-button:hover {
+    background-color: #1a5c46 !important;
+    border-color: #030504 !important;
+    transform: translate(-6px, -6px) rotate(1deg) !important;
+    box-shadow: 10px 10px 0 #000000, 15px 15px 20px rgba(64, 164, 122, 0.2) !important;
+  }
+  
+  #page-mod-geniai-view .rerc-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease-in-out !important;
+    z-index: 3 !important;
+  }
+  
+  #page-mod-geniai-view .rerc-icon {
+    width: 90px !important;
+    height: 55px !important;
+    object-fit: contain !important;
+    transition: all 0.3s ease-in-out !important;
+    border-radius: 4px;
+    background: white; /* optional to make it pop */
+    padding: 2px;
+  }
+  
+  #page-mod-geniai-view .brutalist-button:hover .rerc-icon {
+    transform: scale(1.1) !important;
+  }
+  
+  #page-mod-geniai-view .brutalist-button:hover .button-text {
+    opacity: 1 !important;
+    max-height: 60px !important;
+    margin-top: 8px !important;
+  }
+
+  /* --- WRAPPED IN A BUTTON STYLE CONTAINER --- */
+.edura-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1em !important;
+    padding: 0.6em 1.2em !important;
+    background-color: #1e1c1d !important;
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 0 6px rgba(183, 132, 255, 0.2) !important;;
+    z-index: 1000 !important;
+    cursor: default !important;
+    font-family: 'Poppins', sans-serif !important;
+    transition: transform 0.3s ease !important;
+    margin-right: 1.5rem !important;
+  }
+  
+  .edura-button:hover {
+    transform: scale(1.02) !important;
+  }
+  
+  /* --- LOADER --- */
+  .loader {
+    position: relative !important;
+    display: flex !important;
+    gap: 0.3em !important;
+    z-index: 2 !important;
+  }
+  
+  .loader::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    height: 2em !important;
+    filter: blur(45px) !important;
+    background-color: #e299ff !important;
+    background-image:
+      radial-gradient(at 52% 57%, hsla(11,83%,72%,1) 0px, transparent 50%),
+      radial-gradient(at 37% 57%, hsla(175,78%,66%,1) 0px, transparent 50%) !important;
+    z-index: -1 !important;
+  }
+  
+  .loader__circle {
+    --size__loader: 0.6em !important;
+    width: var(--size__loader) !important;
+    height: var(--size__loader) !important;
+    border-radius: 50% !important;
+    animation: loader__circle__jumping 1.6s ease-in-out infinite !important;
+    background-color: #b185ff !important;
+    box-shadow: 0 0 6px #b185ff;
+  }
+  
+  .loader__circle:nth-child(2n) {
+    animation-delay: 300ms !important;
+    background-color: #d98fff !important;
+    box-shadow: 0 0 6px #d98fff;
+  }
+  
+  .loader__circle:nth-child(3n) {
+    animation-delay: 600ms !important;
+  }
+  
+  @keyframes loader__circle__jumping {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-12px) scale(0.6);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    75% {
+      transform: translateY(5px) scale(0.95);
+    }
+  }
+  
+  /* --- EDURA TEXT --- */
+  .edura-text span {
+    font-size: 1.8em !important;
+    font-weight: bold !important;
+    color: #e9c6ff !important;
+    text-shadow:
+      0 0 5px #d198ff,
+      0 0 10px #c068ff,
+      0 0 15px #b44dff;
+    animation: fadeInEdura 2.5s ease-out forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fadeInEdura {
+    0% {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+
+  .edura-button:focus,
+.edura-button:active {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+}
+.lf-icon {
+    background-color: black !important;
+    padding: 4px; /* Optional: adds spacing around logo */
+    border-radius: 6px; /* Same style as others */
+  }
+  

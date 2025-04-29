@@ -1,4 +1,23 @@
 {{!
+    ⚠️ IMPORTANT NOTICE FOR DEVELOPERS ⚠️
+
+    DO NOT DELETE ANY SECTIONS OF THIS FILE.
+
+    This file contains core UI and behavioral structure for the Moodle plugin `mod_geniai`.
+    Removing or modifying any existing HTML, Mustache logic, or JS may lead to UI breakage or
+    non-functional features. Many plugin elements (chat interface, feedback, scenario switch, PDF generation,
+    grading logic) rely on this precise structure.
+
+    ✅ To modify styles or add new features:
+        • Append your custom HTML/CSS/JS at the bottom of this file (or follow the structure above).
+        • DO NOT remove or replace any current IDs, classes, or hidden inputs.
+        • ALWAYS PURGE MOODLE CACHE after making updates:
+          → Site administration → Development → Purge all caches
+
+    Thank you!
+}}
+
+{{!
     This file is part of Moodle - https://moodle.org/
 
     Moodle is free software: you can redistribute it and/or modify
@@ -25,37 +44,98 @@
         "message_02": "string"
     }
 }}
-
-<div id="page-mod-geniai-view">
-  <div class="theme-toggle-container">
-    <button id="theme-toggle-btn">
-      <span class="theme-icon">🌙</span>
-      <span class="theme-text">Dark Mode</span>
-    </button>
-  
-
-<div class="geniai-scenario-select">
-    <label for="geniai-scenario">👥 Select Parent Persona:</label>
-    <select id="geniai-scenario" class="custom-select" onchange="handleScenarioChange(this.value)">
-        {{#scenarios}}
-            <option value="{{value}}">{{label}}</option>
-        {{/scenarios}}
-    </select>
+<div id="geniai-header-bar" class="brutalist-banner-row">
+<div class="button-container">
+  <button class="brutalist-button openai button-1">
+    <div class="openai-logo">
+      <svg
+        class="openai-icon"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.8956zm16.0993 3.8558L12.5907 8.3829 14.6108 7.2144a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.3927-.6813zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"
+          fill="#10A37F"
+        ></path>
+      </svg>
+    </div>
+    <div class="button-text">
+      <span>Powered By</span>
+      <span>GPT-Omni</span>
+    </div>
+  </button>
+  <div class="brutalist-button rerc-button">
+  <div class="rerc-logo">
+    <img src="./pix/rerc_logo.jpg" alt="RERC on AAC Logo" class="rerc-icon">
+  </div>
+  <div class="button-text">
+    <span>Sponsored By</span>
+    <span>RERC on AAC</span>
+  </div>
 </div>
+<div class="brutalist-button rerc-button">
+  <div class="rerc-logo">
+    <img src="./pix/lf.png" alt="Learning Factory Logo" class="rerc-icon lf-icon">
+  </div>
+  <div class="button-text">
+    <span>A project by</span>
+    <span>Learning Factory</span>
+  </div>
+</div>
+</div>
+
+<div class="geniai-button-row">
+  <input type="hidden" id="teacher-name" value="{{teacher_name}}">
+
+  <!-- LEFT: Light/Dark Button -->
+  <div class="button-group-left">
+      <button class="edura-button">
+  <div class="loader">
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+    <div class="loader__circle"></div>
+  </div>
+  <div class="edura-text"><span>EDURA</span></div>
+</button>
+    <button id="theme-toggle-btn" class="btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" class="sparkle">
+        <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z" fill="currentColor"/>
+      </svg>
+      <span class="text">Light/Dark</span>
+    </button>
+  </div>
+
+
+  <!-- RIGHT: Other Buttons -->
+  <div class="button-group-right">
+    <button id="geniai-generate-pdf" class="btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" class="sparkle">
+        <path d="M5 20h14v-2H5v2zm7-18v12l4-4h-3V2h-2v8H8l4 4z" fill="currentColor"/>
+      </svg>
+      <span class="text">Generate PDF</span>
+    </button>
+
+    <button id="geniai-clear-history" class="btn" title="Clear Chat">
+      <svg width="24" height="24" viewBox="0 0 24 24" class="sparkle">
+        <path d="M3 6h18v2H3V6zm2 3h14v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9zm3 2v9h2v-9H8zm4 0v9h2v-9h-2zm4 0v9h2v-9h-2zM9 4h6V2H9v2z" fill="currentColor"/>
+      </svg>
+      <span class="text">Clear Chat</span>
+    </button>
+
+    <select id="geniai-scenario" class="btn custom-select">
+      {{#scenarios}}
+        <option value="{{value}}">{{label}}</option>
+      {{/scenarios}}
+    </select>
+  </div>
 </div>
 
   <div id="geniai-mod-popup">
-
     <input type="hidden" id="local_geniai_message_01" value="{{message_01}}">
     <input type="hidden" id="local_geniai_message_02" value="{{message_02}}">
-    <a id="geniai-clear-history"
-       title="{{#str}}clear_history_title,local_geniai{{/str}}"
-       href="#"
-       role="button"
-       aria-label="{{#str}}clear_history_title,local_geniai{{/str}}">
-        {{#pix}}icons/clear,local_geniai{{/pix}}
-        <span class="clear-text">Clear Chat</span>
-    </a>
+
     <div id="geniai-scrollarea">
         <div id="geniai-area-mensagens"></div>
     </div>
@@ -81,8 +161,124 @@
 <script>
 
 document.addEventListener('DOMContentLoaded', function () {
+// PDF GENERATION HANDLER: Export conversation as downloadable PDF
+ document.getElementById("geniai-generate-pdf")?.addEventListener("click", function (e) {
+    e.preventDefault();
 
-    function handleScenarioChange(value) {
+    const conversationArea = document.getElementById("geniai-area-mensagens");
+    if (!conversationArea) return;
+    const clonedConversation = conversationArea.cloneNode(true);
+
+    // Clean up hidden/audio
+    clonedConversation.querySelectorAll('[style*="display:none"], [style*="visibility:hidden"], [hidden]')
+        .forEach(el => el.remove());
+    clonedConversation.querySelectorAll("audio").forEach(audio => audio.remove());
+
+    const teacherName = document.getElementById("teacher-name")?.value || "Teacher";
+    const scenarioValue = localStorage.getItem("geniai-scenario") || "";
+    let parentLabel = "Parent";
+    if (scenarioValue === "anna") parentLabel = "Anna Charles (Parent)";
+    else if (scenarioValue === "brianna") parentLabel = "Brianna Mitchell (Parent)";
+    else if (scenarioValue === "cathy") parentLabel = "Cathy Fratner (Parent)";
+
+    const messages = clonedConversation.querySelectorAll(".geniai-message, .geniai-server");
+    const totalMessages = messages.length;
+    let number = 1;
+
+    messages.forEach((msg, index) => {
+        const isTeacher = !msg.classList.contains("geniai-server");
+        const originalHTML = msg.innerHTML.trim();
+        const originalText = msg.innerText.trim();
+
+        // Prevent page-break splitting
+        msg.style.breakInside = "avoid";
+        msg.style.backgroundColor = "transparent";
+        msg.style.color = "black";
+        msg.style.marginBottom = "1em";
+
+        // Handle initial bot messages
+        if (index < 2) {
+            const speaker = "ChatBot";
+            const tag = `<span style="background-color:#003366; color:white; padding:2px 6px; border-radius:4px;">${speaker}</span>`;
+            msg.innerHTML = `${tag}: ${originalText}`;
+            if (index === 1) {
+                const br = document.createElement("div");
+                br.style.pageBreakAfter = "always";
+                msg.after(br);
+            }
+            return;
+        }
+
+        // Handle feedback (last message)
+        if (index === totalMessages - 1) {
+            const speaker = "ChatBot";
+            const tag = `<span style="background-color:#003366; color:white; padding:2px 6px; border-radius:4px;">${speaker}</span>`;
+            msg.innerHTML = `${tag}: ${originalHTML}`;
+
+            const feedbackWrapper = document.createElement("div");
+            feedbackWrapper.style.pageBreakBefore = "always";
+            feedbackWrapper.innerHTML = `
+                <h2 style="color: black !important; text-align: center; font-size: 1.5em; font-weight: bold;">Feedback</h2>
+                <div style="margin-left: 1em; color: black;">${msg.innerHTML}</div>
+            `;
+            msg.replaceWith(feedbackWrapper);
+            return;
+        }
+
+        // Skip numbering for meta/system messages
+        const isSystemMeta = originalText.startsWith("You are talking to") || /^\$\$persona=/.test(originalText);
+        if (isSystemMeta) {
+            msg.innerHTML = originalText; // Just display as-is without number or tag
+            msg.style.fontStyle = "italic";
+            msg.style.color = "gray";
+            return;
+        }
+
+        // Format speaker tag
+        const speaker = isTeacher ? `${teacherName} (Teacher)` : parentLabel;
+        const bgColor = isTeacher ? "#004d26" : "#003366";
+        const tag = `<span style="background-color:${bgColor}; color:white; padding:2px 6px; border-radius:4px;">${speaker}</span>`;
+
+        // Add numbering only for real dialogue messages
+        msg.innerHTML = `${tag}: ${originalText} (${number})`;
+        number++;
+    });
+
+    const wrapper = document.createElement("div");
+
+    // Heading
+    const heading = document.createElement("h1");
+    heading.textContent = "Conversation Report";
+    heading.style.fontWeight = "bold";
+    heading.style.color = "black";
+    heading.style.textAlign = "center";
+    heading.style.fontSize = "2em";
+    heading.style.marginBottom = "1em";
+    heading.style.marginTop = "0.5em";
+    heading.style.setProperty("color", "black", "important");
+    wrapper.appendChild(heading);
+    wrapper.appendChild(clonedConversation);
+
+    const opt = {
+        margin: 0.5,
+        filename: 'chat_conversation.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().from(wrapper).set(opt).save();
+});
+
+const scenarioDropdown = document.getElementById("geniai-scenario");
+if (scenarioDropdown) {
+    scenarioDropdown.addEventListener("change", function () {
+        handleScenarioChange(this.value);
+    });
+}
+
+// SCENARIO CHANGE HANDLER: Updates persona and resets conversation
+function handleScenarioChange(value) {
     localStorage.setItem('geniai-scenario', value);
 
     // Simulate a click on the Clear Chat button *first*
@@ -127,6 +323,8 @@ window.handleScenarioChange = handleScenarioChange;
     const toggleBtn = document.getElementById("theme-toggle-btn");
     const container = document.getElementById("page-mod-geniai-view");
 
+// THEME TOGGLE: Handle switching between dark/light mode
+
     if (!toggleBtn) return;
 
     // Load saved theme preference on page load
@@ -138,7 +336,9 @@ window.handleScenarioChange = handleScenarioChange;
 
     toggleBtn.addEventListener("click", function () {
         const isDark = container.classList.toggle("dark-mode");
-        toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        toggleBtn.innerHTML = isDark
+    ? `<span class="theme-icon">☀️</span><span class="text">Light Mode</span>`
+    : `<span class="theme-icon">🌙</span><span class="text">Dark Mode</span>`;
         localStorage.setItem("geniai-theme", isDark ? "dark" : "light");
     });
     
@@ -153,6 +353,7 @@ if (clearButton) {
     });
 }
 
+// AUTO GRADE EXTRACTION: Parses bot response and sends grade to backend
 
     const cmid = {{{cmid}}}; // Passed from PHP → Mustache
 
@@ -203,7 +404,13 @@ if (clearButton) {
         observer.observe(target, { childList: true, subtree: true });
     }
 
-    
+    const audioObserver = new MutationObserver(() => {
+    const audioBars = document.querySelectorAll(".audioplayer-time.audioplayer-time-duration");
+    audioBars.forEach(bar => bar.remove());
+    });
+    audioObserver.observe(document.body, { childList: true, subtree: true });
+
 });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
