@@ -1,89 +1,147 @@
-# Moodle Chatbot
-This repository is for the plugin files for AAC Moodle Chatbot
+# EDURA
 
-# Before installing the Moodle chatbot activity (block) version, you will need to install the original non-block plugin geniai
-Download the zip of the latest version and install the plugin: <br />
-   Link: https://moodle.org/plugins/local_geniai <br />
-Site Administration>Plugins>Install Plugins>Install plugin from the ZIP File
+This repository contains the plugin files for the **AAC Moodle Chatbot**.
 
-## Next install the Moodle chatbot activity (block) plugin code on this directory
-Download the zip of this directory and install it as a plugin: <br />
-Site Administration>Plugins>Install Plugins>Install plugin from the ZIP File
+---
 
-## Pulling changes from the repository to your local repository
-Make sure the IDE is connected to GitHub.
+## 📥 Installation Guide
 
-### Using Terminal
-> git branch #list all the branches a local repository has<br />
-> git checkout #get the current state of the branch you are in<br />
-> git checkout -b (your branch name) (origin branch) #creates a new branch with the files of the original branch<br />
-> git push origin (your branch name) #makes the new branch available remotely<br />
-> git merge master #merges changes from the master into feature branch<br />
-Make changes to the new branch<br />
-> git checkout master #change to the master branch<br />
-> git merge --no-ff (your branch name) #create commit object during merge<br />
-> git push origin master #push merge changes. In most cases this will be done on the Github so other people can review your work<br />
-> git push origin :(your branch name) #deletes the remote branch.<br />
+### Install Geniai Base Plugin
 
+Before installing the Moodle chatbot activity plugin, ensure the core Geniai plugin is installed first:
 
-**STEPS FOR MAKING A CLEAN CLONE.**
-1. Install Git if you don't have it already.
+* Download the latest Geniai plugin from [Moodle Plugins](https://github.com/DrKat0m/Geniai_Base_Plugin).
+* Navigate in Moodle to:
 
-   Link: https://git-scm.com/downloads
-   
-2. In your command prompt (i.e. Git Bash), use the cd command to travel to the path where you want to clone the repo.
+```
+Site Administration → Plugins → Install Plugins → Install plugin from ZIP file
+```
 
-   Ex. cd C:\xampp\htdocs\MyMoodle\mod
+* Upload the downloaded ZIP and install it.
 
-3. Clone the repository using the ssh key found in the green code dropdown.
+### Install Moodle Chatbot Activity Plugin
 
-   Ex. git clone PASTE-REPO-SSH-KEY-HERE
-   
-4. Go inside the repo file using cd
-   
-5. Create your branch
-   
-   Ex. git checkout -b jtd5597/first_branch
+* Download the ZIP file of this repository.
+* Navigate again in Moodle to:
 
-6. Pull
+```
+Site Administration → Plugins → Install Plugins → Install plugin from ZIP file
+```
 
-      Ex. git pull
+* Install the downloaded ZIP file.
 
-**STEPS FOR INITIALIZING THE REPO IN YOUR PROJECT FILE IF YOU HAVE ALREADY DONE WORK**
+---
 
-1. Navigate to your project directory using cd command.
+## 🚀 Git Workflow
 
-2. Initialize git repo
+### Initial Repository Setup (Clean Clone)
 
-   Ex. git init
+* Ensure Git is installed ([Git Download](https://git-scm.com/downloads)).
+* Open your terminal (Git Bash recommended) and navigate to your target directory:
 
-4. Add git repo as a remote
+```bash
+cd C:\xampp\htdocs\MyMoodle\mod
+```
 
-   Ex. git remote add origin PASTE-REPO-SSH-KEY-HERE
+* Clone the repository:
 
-5. Make your branch and make sure you're switched into it.
+```bash
+git clone <SSH-URL>
+cd <repository-folder>
+```
 
-   Ex. git checkout -b branch-name
+* Create and switch to your working branch:
 
-6. Pull the main branch
+```bash
+git checkout -b your-branch-name
+```
 
-   Ex. git pull origin main
+* Pull any updates if necessary:
 
-8. Add your files
+```bash
+git pull
+```
 
-   Ex. git add .
+### Initializing Git in an Existing Project Directory
 
-   The "." uploads all files. However, git won't add the files that haven't been changed from whatever you're pushing to.
+* Navigate to your existing project directory:
 
-9. Commit your changes
+```bash
+cd path\to\your\project
+```
 
-   Ex. git commit -m "Meaningful commit message"
+* Initialize Git:
 
-10. Push to the repo
+```bash
+git init
+git remote add origin <SSH-URL>
+```
 
-    Ex. git push -u origin jtd5597/first_branch
-    
-**Debugging using Xdebug**
+* Create and switch to your working branch:
 
-Navigate to the resource channel of the discord and follow Kartavya's step-by-step instructions of how to install PHP and Xdebug:<br />
-   Link: https://discord.com/channels/1328761463774511164/1328771210087235595/1346614587008618588
+```bash
+git checkout -b your-branch-name
+git pull origin main
+```
+
+* Stage and commit your files:
+
+```bash
+git add .
+git commit -m "Meaningful commit message"
+```
+
+* Push your branch:
+
+```bash
+git push -u origin your-branch-name
+```
+
+### Standard Branch Management
+
+* List all branches:
+
+```bash
+git branch
+```
+
+* Switch branches:
+
+```bash
+git checkout <branch-name>
+```
+
+* Create a new branch from an existing one:
+
+```bash
+git checkout -b <new-branch-name> <existing-branch>
+git push origin <new-branch-name>
+```
+
+* Merge changes from `master`:
+
+```bash
+git merge master
+```
+
+* Switch back to master and merge feature branch:
+
+```bash
+git checkout master
+git merge --no-ff <branch-name>
+git push origin master
+```
+
+* Delete a remote branch:
+
+```bash
+git push origin :<branch-name>
+```
+
+---
+
+## 🐞 Debugging with Xdebug
+
+Follow Kartavya's detailed guide in the resource channel of Discord to install and configure PHP and Xdebug properly for debugging.
+
+🔗 [Xdebug Installation Guide](https://gist.github.com/DrKat0m#-debugging-with-xdebug)
